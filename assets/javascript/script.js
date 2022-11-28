@@ -64,19 +64,21 @@ function generatePassword() {
   // counter for num of categories.  This allows for correct 
   // selection/deletion by counting backward based on how many categories 
   // are false.
-  var numCategories = 3;
+  var numCategories = 4;
 
   // conditionals to remove rows from 2d array if they are not selected
+  // shift() handles first and pop() handles last elements,  
+  // Middle elements are nymCategories -1 (-2) due to position from end of array
   if(passParams.lowCase === false) {
     categories.shift();
     numCategories--;
   };
   if(passParams.upCase === false) {
-    categories.splice(numCategories - 2,1);
+    categories.splice(numCategories - 3,1);
     numCategories--;
   };
   if(passParams.num === false) {
-    categories.splice(numCategories - 1,1);
+    categories.splice(numCategories - 2,1);
     numCategories--;
   };
   if(passParams.spec === false) {
@@ -84,16 +86,27 @@ function generatePassword() {
     numCategories--;
   };
 
-  console.log("after splice" + categories);
-  return generatedPass;
 
-  // log all inputs for dev use
+  for (var i = 0; i < passParams.len; i++) {
+    var row = Math.floor(Math.random() * numCategories);
+    console.log("row == " + row);
+    var column = Math.floor(Math.random() * categories[row].length);
+    console.log("column == " + column);
+    generatedPass[i] = categories[row][column];
+    console.log(categories[row][column]);
+
+  };
+
+    // log all inputs for dev use
   // console.log(passParams.lowCase);
   // console.log(passParams.upCase);
   // console.log(passParams.num);
   // console.log(passParams.spec);
-  console.log(passParams.len);
+  // console.log(passParams.len);
+  // console.log("after splice " + categories);
 
+
+  return generatedPass;
 };
 
 
