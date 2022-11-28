@@ -17,11 +17,14 @@ var passParams = [
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  var password =   String(generatePassword());
 
-  passwordText.value = password;
 
+  // passwordText.value = password removed.  using this other method
+  // to replace the html directly as well as removing all the leftover 
+  // ',' characters from the object(array) conversion
+  document.querySelector('#password').innerHTML = password.replace(/,/g, '');
+  
 };
 
 // generatePassword will ask for all parameters before asking for length.
@@ -94,10 +97,12 @@ function generatePassword() {
     console.log("column == " + column);
     generatedPass[i] = categories[row][column];
     console.log(categories[row][column]);
-
   };
 
-    // log all inputs for dev use
+
+  console.log(typeof(generatedPass));
+
+  // log all inputs for dev use
   // console.log(passParams.lowCase);
   // console.log(passParams.upCase);
   // console.log(passParams.num);
