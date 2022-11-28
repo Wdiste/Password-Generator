@@ -29,9 +29,16 @@ function generatePassword() {
   passParams.num = confirm("Would you like to include numbers in your password?");
   passParams.spec = confirm("Would you like to include special characters in your password?");
 
+  if(passParams.lowCase == false && passParams.upCase == false && 
+     passParams.num == false && passParams.spec == false) {
+      alert("Error: please select at least one character type")
+      return "Please select at least one character type";
+     }
+
   passParams.length = parseInt(prompt("Choose a length for your password between 8 and 128 characters."))
 
   if (passParams.length.isNaN || (passParams.length < 8 || passParams.length > 128)) {
+    alert("Please enter a number between 8 and 128");
     return "Please enter a number between 8 and 128";
   };
 
